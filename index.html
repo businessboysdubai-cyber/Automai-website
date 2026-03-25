@@ -134,6 +134,18 @@
 
     .btn-secondary:hover { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
 
+    .hero-robot {
+      margin: 3.5rem auto 0;
+      max-width: 320px;
+      filter: drop-shadow(0 0 40px rgba(99,102,241,0.35));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -204,6 +216,72 @@
     <div class="cta-group">
       <a href="#" class="btn-primary">Inizia gratis</a>
       <a href="#" class="btn-secondary">Guarda la demo</a>
+    </div>
+
+    <!-- Robot SVG -->
+    <div class="hero-robot">
+      <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1e1b4b"/>
+            <stop offset="100%" stop-color="#0f0f1a"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Antenna -->
+        <line x1="100" y1="10" x2="100" y2="38" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="100" cy="7" r="5" fill="#a855f7"/>
+
+        <!-- Head -->
+        <rect x="52" y="38" width="96" height="72" rx="18" fill="url(#g2)" stroke="url(#g1)" stroke-width="2"/>
+
+        <!-- Eyes -->
+        <rect x="68" y="60" width="22" height="16" rx="5" fill="url(#g1)" opacity="0.9"/>
+        <rect x="110" y="60" width="22" height="16" rx="5" fill="url(#g1)" opacity="0.9"/>
+        <!-- Eye pupils -->
+        <circle cx="79" cy="68" r="4" fill="#fff" opacity="0.85"/>
+        <circle cx="121" cy="68" r="4" fill="#fff" opacity="0.85"/>
+
+        <!-- Mouth -->
+        <rect x="72" y="88" width="56" height="8" rx="4" fill="#6366f1" opacity="0.5"/>
+        <rect x="72" y="88" width="20" height="8" rx="4" fill="#a855f7"/>
+
+        <!-- Neck -->
+        <rect x="90" y="110" width="20" height="12" rx="4" fill="url(#g1)"/>
+
+        <!-- Body -->
+        <rect x="38" y="122" width="124" height="88" rx="16" fill="url(#g2)" stroke="url(#g1)" stroke-width="2"/>
+
+        <!-- Chest panel -->
+        <rect x="58" y="138" width="84" height="52" rx="10" fill="rgba(99,102,241,0.12)" stroke="rgba(99,102,241,0.3)" stroke-width="1.5"/>
+        <!-- Chest lights -->
+        <circle cx="80" cy="158" r="7" fill="#6366f1" opacity="0.8"/>
+        <circle cx="100" cy="158" r="7" fill="#a855f7" opacity="0.8"/>
+        <circle cx="120" cy="158" r="7" fill="#ec4899" opacity="0.8"/>
+        <!-- Chest bar -->
+        <rect x="68" y="174" width="64" height="6" rx="3" fill="rgba(99,102,241,0.4)"/>
+
+        <!-- Left arm -->
+        <rect x="6" y="126" width="28" height="72" rx="14" fill="url(#g2)" stroke="url(#g1)" stroke-width="2"/>
+        <circle cx="20" cy="205" r="10" fill="url(#g1)" opacity="0.7"/>
+
+        <!-- Right arm -->
+        <rect x="166" y="126" width="28" height="72" rx="14" fill="url(#g2)" stroke="url(#g1)" stroke-width="2"/>
+        <circle cx="180" cy="205" r="10" fill="url(#g1)" opacity="0.7"/>
+
+        <!-- Left leg -->
+        <rect x="58" y="210" width="34" height="44" rx="12" fill="url(#g2)" stroke="url(#g1)" stroke-width="2"/>
+        <!-- Right leg -->
+        <rect x="108" y="210" width="34" height="44" rx="12" fill="url(#g2)" stroke="url(#g1)" stroke-width="2"/>
+
+        <!-- Feet -->
+        <rect x="52" y="244" width="46" height="14" rx="7" fill="url(#g1)" opacity="0.7"/>
+        <rect x="102" y="244" width="46" height="14" rx="7" fill="url(#g1)" opacity="0.7"/>
+      </svg>
     </div>
   </section>
 
