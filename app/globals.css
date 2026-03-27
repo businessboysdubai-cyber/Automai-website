@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* ─── CSS Variables ──────────────────────────────────────────────────────────── */
+:root {
+  --bg: #050510;
+  --blue: #4F8EF7;
+  --cyan: #00D4FF;
+  --violet: #7B61FF;
+  --white: #F0F4FF;
+  --muted: #8892A4;
+  --glow-blue: 0 0 20px rgba(79,142,247,0.5), 0 0 60px rgba(79,142,247,0.2);
+  --glow-cyan:  0 0 20px rgba(0,212,255,0.5),  0 0 60px rgba(0,212,255,0.2);
+  --glow-violet:0 0 20px rgba(123,97,255,0.5), 0 0 60px rgba(123,97,255,0.2);
+  --font-inter: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-space: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Reset / Base ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #08081a; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--blue), var(--violet));
+  border-radius: 3px;
+}
+
+/* ─── Text Gradient ──────────────────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-animated {
+  background: linear-gradient(270deg, var(--blue), var(--cyan), var(--violet), var(--cyan), var(--blue));
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── Glassmorphism ──────────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.glass-strong {
+  background: rgba(79,142,247,0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(79,142,247,0.15);
+}
+
+/* ─── Glow ───────────────────────────────────────────────────────────────────── */
+.glow-blue  { box-shadow: var(--glow-blue); }
+.glow-cyan  { box-shadow: var(--glow-cyan); }
+.glow-violet{ box-shadow: var(--glow-violet); }
+.text-glow-blue  { text-shadow: 0 0 30px rgba(79,142,247,0.8); }
+.text-glow-cyan  { text-shadow: 0 0 30px rgba(0,212,255,0.8); }
+
+/* ─── Pulse ring ─────────────────────────────────────────────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ─── Reveal on scroll ───────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Custom cursor ──────────────────────────────────────────────────────────── */
+.cursor-dot, .cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+/* ─── Grid bg pattern ────────────────────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(79,142,247,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,142,247,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Noise overlay ──────────────────────────────────────────────────────────── */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* ─── Section separator ──────────────────────────────────────────────────────── */
+.section-sep {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79,142,247,0.3), transparent);
+}
