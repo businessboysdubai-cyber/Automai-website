@@ -8,8 +8,8 @@ import HowItWorks from '@/components/sections/HowItWorks';
 import CTASection from '@/components/sections/CTA';
 import CustomCursor from '@/components/ui/CustomCursor';
 
-// Load 3D scene only on client side (no SSR)
-const Scene = dynamic(() => import('@/components/canvas/Scene'), {
+// Robot 3D scene — client-only, no SSR (uses WebGL)
+const RobotScene = dynamic(() => import('@/components/canvas/RobotScene'), {
   ssr: false,
   loading: () => null,
 });
@@ -20,11 +20,11 @@ export default function HomePage() {
       {/* Custom cursor */}
       <CustomCursor />
 
-      {/* Fixed 3D background canvas */}
-      <Scene />
-
       {/* Fixed navbar */}
       <Navbar />
+
+      {/* Robot 3D scene — right half of viewport, homepage only */}
+      <RobotScene />
 
       {/* Page content — sits above canvas */}
       <main className="relative z-10">
