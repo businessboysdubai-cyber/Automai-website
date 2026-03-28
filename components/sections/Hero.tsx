@@ -1,16 +1,9 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { HERO } from '@/lib/constants';
-
-// Embed the robot inside the phone mockup — client only, no SSR
-const RobotSceneEmbed = dynamic(
-  () => import('@/components/canvas/RobotScene'),
-  { ssr: false, loading: () => null },
-);
 
 // ── Typewriter cycling questions ──────────────────────────────────────────────
 const QUESTIONS = [
@@ -325,9 +318,18 @@ export default function Hero() {
               className="absolute inset-2 rounded-[34px] overflow-hidden"
               style={{ background: '#020208' }}
             >
-              {/* 3D Robot canvas */}
-              <div className="w-full h-full">
-                <RobotSceneEmbed embedded />
+              {/* AI orb visual */}
+              <div className="w-full h-full flex items-center justify-center">
+                <div
+                  style={{
+                    width: 140,
+                    height: 140,
+                    borderRadius: '50%',
+                    background: 'radial-gradient(circle at 40% 35%, #4F8EF7 0%, #7B61FF 50%, #00D4FF 100%)',
+                    boxShadow: '0 0 60px rgba(0,212,255,0.4), 0 0 120px rgba(79,142,247,0.2)',
+                    animation: 'orbFloat 3s ease-in-out infinite',
+                  }}
+                />
               </div>
 
               {/* Screen scanlines */}
@@ -563,6 +565,10 @@ export default function Hero() {
         @keyframes progressGrow {
           from { width: 0%; }
           to { width: 80%; }
+        }
+        @keyframes orbFloat {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-12px) scale(1.04); }
         }
       `}</style>
     </section>

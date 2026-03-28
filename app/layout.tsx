@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ThemeProvider } from 'next-themes';
+import { DottedSurface } from '@/components/ui/dotted-surface';
 
 export const metadata: Metadata = {
   title: 'Automai — AI Automation Agency',
@@ -23,16 +25,14 @@ export default function RootLayout({
       style={{ colorScheme: 'dark' }}
     >
       <head>
-        {/*
-          Preconnect to Google Fonts.
-          Fonts load client-side; if unavailable the CSS fallback stack is used.
-        */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Fonts are loaded via CSS @import in globals.css so SSR never blocks on them */}
       </head>
-      <body className="min-h-full bg-[#050510] text-[#F0F4FF] antialiased">
-        {children}
+      <body className="min-h-full bg-[#080810] text-[#F0F4FF] antialiased">
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+          <DottedSurface />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
