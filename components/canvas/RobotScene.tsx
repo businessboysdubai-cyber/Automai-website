@@ -3,7 +3,6 @@
 import { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
-import { RectAreaLight } from 'three';
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
 import Robot from './Robot';
 import { useMouse } from '@/hooks/useMouse';
@@ -50,10 +49,6 @@ function RobotLights() {
 
 function SceneContent() {
   const mouseRef = useMouse();
-
-  // Read mouse values every frame via a state updated in an RAF
-  // We use a plain object to avoid re-renders; Robot reads directly via props
-  // passed from the parent state updated below.
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -85,7 +80,34 @@ function SceneContent() {
   );
 }
 
-export default function RobotScene() {
+interface RobotSceneProps {
+  /** When true, renders as a block element filling its parent container.
+   *  When false (default), renders as a fixed right-half viewport overlay. */
+  embedded?: boolean;
+}
+
+export default function RobotScene({ embedded = false }: RobotSceneProps) {
+  const canvas = (
+    <Canvas
+      camera={{ position: [0, embedded ? 0.3 : 0, embedded ? 4 : 5], fov: embedded ? 42 : 45 }}
+      gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
+      dpr={[1, 1.5]}
+      style={{ background: 'transparent', width: '100%', height: '100%' }}
+    >
+      <Suspense fallback={null}>
+        <SceneContent />
+      </Suspense>
+    </Canvas>
+  );
+
+  if (embedded) {
+    return (
+      <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+        {canvas}
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -109,17 +131,7 @@ export default function RobotScene() {
           }
         }
       `}</style>
-
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
-        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
-        dpr={[1, 1.5]}
-        style={{ background: 'transparent' }}
-      >
-        <Suspense fallback={null}>
-          <SceneContent />
-        </Suspense>
-      </Canvas>
+      {canvas}
     </div>
   );
 }
